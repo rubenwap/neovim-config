@@ -51,3 +51,5 @@ cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev Qall qall
 
+""" Autocommands
+autocmd TextChanged,TextChangedI <buffer> silent write " Save file after changes
