@@ -1,19 +1,28 @@
 call plug#begin()
 
 " Aesthetics - Main
-Plug 'dracula/vim' " Theme
+Plug 'morhetz/gruvbox' " Theme
 Plug 'vim-airline/vim-airline' " Status bar
 Plug 'vim-airline/vim-airline-themes' " Themes for airline
 Plug 'ryanoasis/vim-devicons' " Adds glyphs to some plugins
 Plug 'junegunn/rainbow_parentheses.vim' " Highlight parenthesis
 Plug 'tpope/vim-fugitive' " Git client
 Plug 'preservim/nerdtree' " NerdTree
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " Golang
+Plug '907th/vim-auto-save' " AutoSave
+Plug 'jiangmiao/auto-pairs' " Auto close pairs
+Plug 'tpope/vim-rhubarb' " GitHub compatibility
+
 call plug#end()
 
+let g:auto_save = 1  " enable AutoSave on Vim startup
+let g:auto_save_silent = 1  " do not display the auto-save notification
+set termguicolors
 
 """ Coloring
+let g:gruvbox_italic=1
 syntax on
-color dracula
+color gruvbox
 highlight Pmenu guibg=white guifg=black gui=bold
 highlight Comment gui=bold
 highlight Normal gui=none
@@ -27,8 +36,9 @@ filetype plugin indent on
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
 set incsearch ignorecase smartcase hlsearch
 set ruler laststatus=2 showcmd showmode
-set list listchars=trail:»,tab:»-
-set fillchars+=vert:\ 
+" Uncomment the following to make hidden chars visible
+" set list listchars=trail:»,tab:»-
+" set fillchars+=vert:\ 
 set wrap breakindent
 set encoding=utf-8
 set number
@@ -36,7 +46,7 @@ set title
 
 """ Nerdtree specific
 
-nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
 
 """ Abbreviations
 
@@ -52,4 +62,5 @@ cnoreabbrev Q q
 cnoreabbrev Qall qall
 
 """ Autocommands
-autocmd TextChanged,TextChangedI <buffer> silent write " Save file after changes
+
+autocmd BufWritePost *.go :silent GoFmt
