@@ -1,3 +1,10 @@
+" Automatic vim plug install if needed
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin()
 
 " Aesthetics - Main
@@ -12,6 +19,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " Golang
 Plug '907th/vim-auto-save' " AutoSave
 Plug 'jiangmiao/auto-pairs' " Auto close pairs
 Plug 'tpope/vim-rhubarb' " GitHub compatibility
+Plug 'kien/ctrlp.vim' " Ctrlp search
 
 call plug#end()
 
